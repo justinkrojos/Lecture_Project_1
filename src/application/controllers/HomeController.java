@@ -68,7 +68,6 @@ public class HomeController {
                 //System.out.println(_draggedFile.toURI().toString());
                 _player = new MediaPlayer(_video);
 
-
                 _mediaView = new MediaView(_player);
                 _mediaView.fitWidthProperty().bind(dragBox.widthProperty());
                 _mediaView.fitHeightProperty().bind(dragBox.heightProperty());
@@ -77,13 +76,14 @@ public class HomeController {
 
                 final String[] currentTime = new String[1];
 
+                // update timestamp to match video length
                 _player.currentTimeProperty().addListener(new InvalidationListener() {
                     @Override
                     public void invalidated(Observable observable) {
                         if (dragBox!=null) {
-                           // System.out.println(Integer.parseInt(_player.getCurrentTime().toString().substring(0, _player.getCurrentTime().toString().length() - 3)
-                                   // .split("\\.", 2)[0]) / 1000);
-                            timeStamp.calculateCurrentDuration(_player.getCurrentTime());
+
+                            timeStamp.convertDuration(_player.getCurrentTime(),false);
+                            timeStamp.convertDuration(_player.getTotalDuration(), true);
 
                             timeStampLabel.setText(timeStamp.getFinalisedLabel());
 
@@ -93,6 +93,10 @@ public class HomeController {
                 });
 
                 _player.play();
+
+                //calculate total duration of video to display
+
+
                 event.consume(); // not dispatched to further listeners
 
             }
