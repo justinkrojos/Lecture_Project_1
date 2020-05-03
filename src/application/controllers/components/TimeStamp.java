@@ -11,8 +11,8 @@ public class TimeStamp {
     private String totalDuration;
 
     public TimeStamp(String currentDuration, String totalDuration) {
-        currentDuration = this.currentDuration;
-        totalDuration = this.totalDuration;
+        this.currentDuration = currentDuration;
+        this.totalDuration = totalDuration;
     }
 
     // convert duration to relevant hours, minutes seconds

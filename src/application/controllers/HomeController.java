@@ -1,10 +1,12 @@
 package application.controllers;
 
+import application.controllers.components.PauseButton;
 import application.controllers.components.TimeStamp;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -21,7 +23,8 @@ import java.sql.Time;
 public class HomeController {
 
 
-    TimeStamp timeStamp = new TimeStamp("0:00", "0:00");
+    TimeStamp _timeStamp = new TimeStamp("0:00", "0:00");
+    PauseButton _pauseButton = new PauseButton();
 
 
     @FXML
@@ -29,6 +32,9 @@ public class HomeController {
 
     @FXML
     private Label timeStampLabel;
+
+    @FXML
+    private Button pauseBtn;
 
     private File _draggedFile;
 
@@ -82,10 +88,10 @@ public class HomeController {
                     public void invalidated(Observable observable) {
                         if (dragBox!=null) {
 
-                            timeStamp.convertDuration(_player.getCurrentTime(),false);
-                            timeStamp.convertDuration(_player.getTotalDuration(), true);
+                            _timeStamp.convertDuration(_player.getCurrentTime(),false);
+                            _timeStamp.convertDuration(_player.getTotalDuration(), true);
 
-                            timeStampLabel.setText(timeStamp.getFinalisedLabel());
+                            timeStampLabel.setText(_timeStamp.getFinalisedLabel());
 
                         }
 
@@ -102,4 +108,12 @@ public class HomeController {
             }
         });
     }
+
+    // play/pause video
+    @FXML
+    private void handlePauseBtn() {
+        _pauseButton.pauseVideo(_player, pauseBtn);
+    }
+
+
 }
