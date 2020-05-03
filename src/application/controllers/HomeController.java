@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.controllers.components.FullscreenButton;
 import application.controllers.components.PauseButton;
 import application.controllers.components.TimeStamp;
 import javafx.beans.InvalidationListener;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -23,9 +25,11 @@ import java.sql.Time;
 public class HomeController {
 
 
-    TimeStamp _timeStamp = new TimeStamp("0:00", "0:00");
-    PauseButton _pauseButton = new PauseButton();
 
+
+
+    @FXML
+    private AnchorPane window;
 
     @FXML
     private Pane dragBox;
@@ -36,11 +40,19 @@ public class HomeController {
     @FXML
     private Button pauseBtn;
 
+    @FXML
+    private Button fsBtn;
+
     private File _draggedFile;
 
     private Media _video;
     private MediaPlayer _player;
     private MediaView _mediaView;
+
+
+    TimeStamp _timeStamp = new TimeStamp("0:00", "0:00");
+    PauseButton _pauseButton = new PauseButton();
+    FullscreenButton _fsButton = new FullscreenButton();
 
     public void initialize() {
         dragBox.setOnDragOver(new EventHandler<DragEvent>() {
@@ -115,5 +127,10 @@ public class HomeController {
         _pauseButton.pauseVideo(_player, pauseBtn);
     }
 
+    // make video full screen
+    @FXML
+    private void handleFsBtn() {
+        _fsButton.fullscreenVideo(_mediaView, dragBox, window);
+    }
 
 }
