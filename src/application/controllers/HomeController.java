@@ -9,18 +9,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
 import java.io.File;
-import java.sql.Time;
 
 public class HomeController {
 
@@ -30,18 +28,34 @@ public class HomeController {
 
     @FXML
     private AnchorPane window;
+    @FXML
+    private AnchorPane videoWindow;
 
     @FXML
     private Pane dragBox;
 
     @FXML
+    private HBox videoBtnHb;
+
+    @FXML
     private Label timeStampLabel;
 
     @FXML
+    private Button forwardBtn;
+    @FXML
     private Button pauseBtn;
+    @FXML
+    private Button backwardBtn;
 
     @FXML
+    private MenuButton speedBtn;
+    @FXML
     private Button fsBtn;
+
+    @FXML
+    private Region blankRegion1;
+    @FXML
+    private Region blankRegion2;
 
     private File _draggedFile;
 
@@ -67,6 +81,10 @@ public class HomeController {
             }
         });
 
+        {
+            videoBtnHb.setHgrow(blankRegion1, Priority.ALWAYS);
+            videoBtnHb.setHgrow(blankRegion2, Priority.ALWAYS);
+        }
 
         dragBox.setOnDragDropped(new EventHandler<DragEvent>() {
 
@@ -130,7 +148,7 @@ public class HomeController {
     // make video full screen
     @FXML
     private void handleFsBtn() {
-        _fsButton.fullscreenVideo(_mediaView, dragBox, window);
+        _fsButton.fullscreenVideo(dragBox, window, videoBtnHb);
     }
 
 }
