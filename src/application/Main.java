@@ -33,17 +33,6 @@ public class Main extends Application {
     // make full screen
     public static void setStage(Pane dragBox, HBox hb) {
 
-        dragBox.setLayoutX(0.0);
-        dragBox.setLayoutY(0.0);
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        dragBox.setMinHeight(screenSize.getHeight());
-        dragBox.setMinWidth(screenSize.getWidth());
-
-        hb.setMinWidth(screenSize.getWidth());
-        hb.setLayoutY(screenSize.getHeight() - 40);
-
         stage.setMaximized(true);
         stage.setFullScreen(true);
         //stage.setScene(new Scene(root, screenSize.getWidth(), screenSize.getHeight()));
@@ -54,16 +43,6 @@ public class Main extends Application {
     // check if it is fullscreen
     public static boolean checkScreen(Pane dragBox, AnchorPane window, HBox hb) {
         if (stage.isFullScreen()) {
-
-            dragBox.setMinHeight(450);
-            dragBox.setMinWidth(600);
-            dragBox.setLayoutX(0.0);
-            dragBox.setLayoutY(0.0);
-            window.setPrefHeight(400);
-            window.setPrefWidth(800);
-
-            hb.setMinWidth(600);
-            hb.setLayoutY(dragBox.getLayoutY() + dragBox.getMinHeight() - 40);
 
             notFs.setMaximized(false);
             notFs.setFullScreen(false);
