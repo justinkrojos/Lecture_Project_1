@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.controllers.components.FullscreenButton;
 import application.controllers.components.PauseButton;
+import application.controllers.components.Timeslider;
 import application.controllers.components.TimeStamp;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.Slider;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -59,6 +61,9 @@ public class HomeController {
     @FXML
     private Region blankRegion2;
 
+    @FXML
+    private Slider slider;
+
     private File _draggedFile;
 
     private Media _video;
@@ -69,6 +74,7 @@ public class HomeController {
     TimeStamp _timeStamp = new TimeStamp("0:00", "0:00");
     PauseButton _pauseButton = new PauseButton();
     FullscreenButton _fsButton = new FullscreenButton();
+    Timeslider _timeSlider = new Timeslider();
 
     public void initialize() {
         dragBox.setOnDragOver(new EventHandler<DragEvent>() {
@@ -111,6 +117,8 @@ public class HomeController {
                 _mediaView.fitHeightProperty().bind(dragBox.heightProperty());
                 _mediaView.setPreserveRatio(false);
                 dragBox.getChildren().add(_mediaView);
+
+                _timeSlider.syncSlider(slider, _player);
 
                 final String[] currentTime = new String[1];
 

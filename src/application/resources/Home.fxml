@@ -38,7 +38,7 @@
                          <Button fx:id="fsBtn" minWidth="32.0" mnemonicParsing="false" onAction="#handleFsBtn" prefHeight="42.0" prefWidth="50.0" text="F" />
                      </children>
                   </HBox>
-                  <Slider>
+                  <Slider fx:id="slider">
                      <VBox.margin>
                         <Insets top="2.0" />
                      </VBox.margin>
