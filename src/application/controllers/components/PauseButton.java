@@ -9,6 +9,9 @@ public class PauseButton {
 
     // Play video and change text
     public void pauseVideo(MediaPlayer _player, Button pauseBtn) {
+        if (_player == null) {
+            return;
+        }
         if (pauseBtn.getText().equals("Pause")) {
             _player.pause();
             pauseBtn.setText("Play");

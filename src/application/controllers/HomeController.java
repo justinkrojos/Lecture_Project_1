@@ -161,4 +161,9 @@ public class HomeController {
         _fsButton.fullscreenVideo(dragBox, window, videoBtnVb);
     }
 
+    // fast forward
+    @FXML
+    private void handleForwardBtn() {
+        _timeSlider.fastforward(slider, _player, 5000);
+    }
 }
