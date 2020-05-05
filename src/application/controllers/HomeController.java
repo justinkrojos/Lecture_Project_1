@@ -36,6 +36,8 @@ public class HomeController {
 
     @FXML
     private HBox videoBtnHb;
+    @FXML
+    private VBox videoBtnVb;
 
     @FXML
     private Label timeStampLabel;
@@ -148,7 +150,7 @@ public class HomeController {
     // make video full screen
     @FXML
     private void handleFsBtn() {
-        _fsButton.fullscreenVideo(dragBox, window, videoBtnHb);
+        _fsButton.fullscreenVideo(dragBox, window, videoBtnVb);
     }
 
 }

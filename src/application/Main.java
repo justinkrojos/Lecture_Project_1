@@ -31,7 +31,7 @@ public class Main extends Application {
     }
 
     // make full screen
-    public static void setStage(Pane dragBox, HBox hb) {
+    public static void setStage() {
 
         stage.setMaximized(true);
         stage.setFullScreen(true);
@@ -41,7 +41,7 @@ public class Main extends Application {
     }
 
     // check if it is fullscreen
-    public static boolean checkScreen(Pane dragBox, AnchorPane window, HBox hb) {
+    public static boolean checkScreen() {
         if (stage.isFullScreen()) {
 
             notFs.setMaximized(false);
@@ -49,8 +49,6 @@ public class Main extends Application {
             notFs.setScene(scene);
             stage.setWidth(800);
             stage.setHeight(600);
-
-
 
             notFs.show();
             return true;
