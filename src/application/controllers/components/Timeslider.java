@@ -59,4 +59,13 @@ public class Timeslider {
         }
     }
 
+    // Fast forward
+    public void fastbackward(Slider timeslider, MediaPlayer player, int milliseconds) {
+
+        if (player != null) {
+            timeslider.setValue((player.getCurrentTime().toMillis() - milliseconds) / player.getTotalDuration().toMillis() * 100);
+            player.seek(player.getMedia().getDuration().multiply(timeslider.getValue() / 100));
+        }
+    }
+
 }

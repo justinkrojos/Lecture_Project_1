@@ -166,4 +166,10 @@ public class HomeController {
     private void handleForwardBtn() {
         _timeSlider.fastforward(slider, _player, 5000);
     }
+
+    // fast backward
+    @FXML
+    private void handleBackwardBtn() {
+        _timeSlider.fastbackward(slider, _player, 5000);
+    }
 }
