@@ -150,12 +150,17 @@ public class HomeController {
                 });
 
 System.out.println("1");
-                application.controllers.components.AudioReader _audioReader = new application.controllers.components.AudioReader();
-                System.out.println("2");
-                //_audioReader.start(_draggedFile.getPath());
-                System.out.println("3");
 
-                //_player.play();
+               /* application.controllers.components.AudioReader _audioReader = new application.controllers.components.AudioReader();
+
+                try {
+                    _audioReader.start(_draggedFile.getPath(), dragBox);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+*/
+                _player.play();
 
                 //calculate total duration of video to display
 

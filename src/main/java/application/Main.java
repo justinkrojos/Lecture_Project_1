@@ -36,7 +36,6 @@ public class Main extends Application {
     // check if it is fullscreen
     public static boolean checkScreen() {
         if (stage.isFullScreen()) {
-
             notFs.setMaximized(false);
             notFs.setFullScreen(false);
             notFs.setScene(scene);
