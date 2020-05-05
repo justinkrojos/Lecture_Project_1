@@ -59,12 +59,19 @@ public class Timeslider {
         }
     }
 
-    // Fast forward
+    // Fast backward
     public void fastbackward(Slider timeslider, MediaPlayer player, int milliseconds) {
 
         if (player != null) {
             timeslider.setValue((player.getCurrentTime().toMillis() - milliseconds) / player.getTotalDuration().toMillis() * 100);
             player.seek(player.getMedia().getDuration().multiply(timeslider.getValue() / 100));
+        }
+    }
+
+    // Change speed
+    public void playbackSpeed(MediaPlayer player, int rate) {
+        if (player != null) {
+            player.setRate((double) rate);
         }
     }
 

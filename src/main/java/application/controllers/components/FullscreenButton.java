@@ -1,11 +1,11 @@
 package application.controllers.components;
 
-import application.Main;
+
+
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
+import application.Main;
 
 import java.awt.*;
 
@@ -13,6 +13,7 @@ public class FullscreenButton {
 
     // make video fullscreen
     public void fullscreenVideo(Pane dragBox, AnchorPane window, VBox vb) {
+
         if (!Main.checkScreen()) {
             Main.setStage();
             dragBox.setLayoutX(0.0);

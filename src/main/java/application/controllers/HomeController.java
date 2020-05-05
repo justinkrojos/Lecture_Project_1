@@ -1,17 +1,14 @@
 package application.controllers;
 
-import application.controllers.components.FullscreenButton;
-import application.controllers.components.PauseButton;
-import application.controllers.components.Timeslider;
-import application.controllers.components.TimeStamp;
+// import application.controllers.components.*;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -19,8 +16,12 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import application.controllers.components.FullscreenButton;
+import application.controllers.components.PauseButton;
+import application.controllers.components.Timeslider;
 
 import java.io.File;
+import java.io.IOException;
 
 public class HomeController {
 
@@ -52,7 +53,7 @@ public class HomeController {
     private Button backwardBtn;
 
     @FXML
-    private MenuButton speedBtn;
+    private ChoiceBox<String> speedBtn;
     @FXML
     private Button fsBtn;
 
@@ -65,18 +66,31 @@ public class HomeController {
     private Slider slider;
 
     private File _draggedFile;
-
     private Media _video;
     private MediaPlayer _player;
     private MediaView _mediaView;
 
 
-    TimeStamp _timeStamp = new TimeStamp("0:00", "0:00");
+    application.controllers.components.TimeStamp _timeStamp = new application.controllers.components.TimeStamp("0:00", "0:00");
     PauseButton _pauseButton = new PauseButton();
     FullscreenButton _fsButton = new FullscreenButton();
     Timeslider _timeSlider = new Timeslider();
 
+
+
     public void initialize() {
+
+        // initialise things that can't be set using scene builder
+        {
+            videoBtnHb.setHgrow(blankRegion1, Priority.ALWAYS);
+            videoBtnHb.setHgrow(blankRegion2, Priority.ALWAYS);
+
+
+            speedBtn.getItems().addAll("1x", "2x", "3x");
+            speedBtn.getSelectionModel().select(0);
+        }
+
+
         dragBox.setOnDragOver(new EventHandler<DragEvent>() {
 
             @Override
@@ -89,10 +103,7 @@ public class HomeController {
             }
         });
 
-        {
-            videoBtnHb.setHgrow(blankRegion1, Priority.ALWAYS);
-            videoBtnHb.setHgrow(blankRegion2, Priority.ALWAYS);
-        }
+
 
         dragBox.setOnDragDropped(new EventHandler<DragEvent>() {
 
@@ -138,7 +149,13 @@ public class HomeController {
                     }
                 });
 
-                _player.play();
+System.out.println("1");
+                application.controllers.components.AudioReader _audioReader = new application.controllers.components.AudioReader();
+                System.out.println("2");
+                //_audioReader.start(_draggedFile.getPath());
+                System.out.println("3");
+
+                //_player.play();
 
                 //calculate total duration of video to display
 
@@ -147,6 +164,13 @@ public class HomeController {
 
             }
         });
+
+        speedBtn.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue ov, Number number, Number t1) {
+                _timeSlider.playbackSpeed(_player, speedBtn.getSelectionModel().getSelectedIndex() + 1);
+            }
+        });
+
     }
 
     // play/pause video
@@ -172,4 +196,5 @@ public class HomeController {
     private void handleBackwardBtn() {
         _timeSlider.fastbackward(slider, _player, 5000);
     }
+
 }
