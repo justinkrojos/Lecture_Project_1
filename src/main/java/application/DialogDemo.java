@@ -20,9 +20,9 @@ import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 public class DialogDemo {
 
     private static final String ACOUSTIC_MODEL =
-            "resource:/en-us";
+            "resource:/edu/cmu/sphinx/models/en-us/en-us";
     private static final String DICTIONARY_PATH =
-            "resource:/cmudict-en-us.dict";
+            "resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict";
 
     private static final String LANGUAGE_MODEL =
             "resource:/edu/cmu/sphinx/demo/dialog/weather.lm";
