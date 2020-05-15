@@ -32,6 +32,13 @@
         <artifactId>ffmpeg</artifactId>
         <version>0.6.2</version>
     </dependency>
+        <!-- https://mvnrepository.com/artifact/de.sciss/sphinx4-core -->
+        <dependency>
+            <groupId>de.sciss</groupId>
+            <artifactId>sphinx4-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
 
     </dependencies>
 
