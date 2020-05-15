@@ -11,6 +11,20 @@
         <maven.compiler.source>1.11</maven.compiler.source>
         <maven.compiler.target>1.11</maven.compiler.target>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
     <dependency>
         <groupId>org.openjfx</groupId>
@@ -27,18 +41,24 @@
                 <artifactId>vlcj</artifactId>
                 <version>4.5.0</version>
             </dependency>
+
         <dependency>
         <groupId>net.bramp.ffmpeg</groupId>
         <artifactId>ffmpeg</artifactId>
         <version>0.6.2</version>
     </dependency>
-        <!-- https://mvnrepository.com/artifact/de.sciss/sphinx4-core -->
+
         <dependency>
-            <groupId>de.sciss</groupId>
+            <groupId>edu.cmu.sphinx</groupId>
             <artifactId>sphinx4-core</artifactId>
-            <version>1.0.0</version>
+            <version>5prealpha-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>edu.cmu.sphinx</groupId>
+            <artifactId>sphinx4-data</artifactId>
+            <version>5prealpha-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 

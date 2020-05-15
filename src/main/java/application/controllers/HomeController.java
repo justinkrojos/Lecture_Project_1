@@ -149,7 +149,7 @@ public class HomeController {
                     }
                 });
 
-System.out.println("1");
+                System.out.println("1");
 
                /* application.controllers.components.AudioReader _audioReader = new application.controllers.components.AudioReader();
 
@@ -177,6 +177,8 @@ System.out.println("1");
         });
 
     }
+
+
 
     // play/pause video
     @FXML
