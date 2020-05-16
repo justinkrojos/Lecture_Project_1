@@ -1,5 +1,6 @@
 package application;
 
+import application.tasks.VoiceSynthesisTask;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
@@ -11,8 +12,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import javafx.concurrent.WorkerStateEvent;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import java.io.IOException;
+
+
 
 
 public class Main extends Application {
@@ -20,6 +26,7 @@ public class Main extends Application {
     private static Stage stage;
     private static Stage notFs;
     private static Scene scene;
+    private ExecutorService team = Executors.newSingleThreadExecutor();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -30,39 +37,6 @@ public class Main extends Application {
         scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-        System.out.println("Loading models...");
-
-        Configuration configuration = new Configuration();
-
-        configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
-        configuration.setDictionaryPath("resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict");
-        configuration.setLanguageModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us.lm.bin");
-
-
-        LiveSpeechRecognizer recognizer =
-                new LiveSpeechRecognizer(configuration);
-
-
-        while (true) {
-            System.out.println("a");
-            recognizer.startRecognition(true);
-            String result = recognizer.getResult().getHypothesis();
-            if (result.startsWith("stop")) {
-                System.out.println("Stopping");
-                recognizer.stopRecognition();
-                return;
-            } else if (result.length() != 0) {
-                System.out.println(result);
-                System.out.println("Printed");
-                recognizer.stopRecognition();
-            } else {
-                System.out.println("Nothing happening");
-                recognizer.stopRecognition();
-            }
-
-        }
 
         }
 

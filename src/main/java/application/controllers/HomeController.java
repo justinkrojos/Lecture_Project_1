@@ -1,6 +1,10 @@
 package application.controllers;
 
 // import application.controllers.components.*;
+import application.controllers.components.VoiceReader;
+import application.tasks.VoiceSynthesisTask;
+import edu.cmu.sphinx.api.Configuration;
+import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -22,6 +26,8 @@ import application.controllers.components.Timeslider;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeController {
 
@@ -70,15 +76,16 @@ public class HomeController {
     private MediaPlayer _player;
     private MediaView _mediaView;
 
-
     application.controllers.components.TimeStamp _timeStamp = new application.controllers.components.TimeStamp("0:00", "0:00");
-    PauseButton _pauseButton = new PauseButton();
+    PauseButton _pauseButton = new PauseButton(null);
     FullscreenButton _fsButton = new FullscreenButton();
     Timeslider _timeSlider = new Timeslider();
 
 
 
-    public void initialize() {
+    public void initialize() throws IOException {
+
+
 
         // initialise things that can't be set using scene builder
         {
@@ -151,16 +158,15 @@ public class HomeController {
 
                 System.out.println("1");
 
-               /* application.controllers.components.AudioReader _audioReader = new application.controllers.components.AudioReader();
+                _player.play();
 
+                VoiceReader _voiceReader = new VoiceReader(_pauseButton, _player, pauseBtn);
+                _pauseButton.setVoiceReader(_voiceReader);
                 try {
-                    _audioReader.start(_draggedFile.getPath(), dragBox);
+                    _voiceReader.readVoice();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-*/
-                _player.play();
 
                 //calculate total duration of video to display
 
@@ -182,7 +188,7 @@ public class HomeController {
 
     // play/pause video
     @FXML
-    private void handlePauseBtn() {
+    private void handlePauseBtn() throws IOException {
         _pauseButton.pauseVideo(_player, pauseBtn);
     }
 
